@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="content">
+	<div>
+		<img id="heading" src="static/h1.png" alt="">
+		<img id="howto" src="static/howto.png" alt="">
+	</div>
+
+
+	<form method="POST" action="" enctype="multipart/form-data">
+		<p><input id="input_url" type="text" name="url" placeholder="ex. https://www.pinterest.com/username/board/"></p>
+		<p><input id="submit" type="submit" value="Download images"></p>
+	</form>
+
+<!--
+	<textarea
+	  name="output"
+	  rows="20"
+	  cols="100"
+	  class="boxsizingBorder"
+	  readonly
+	>{{ output }}</textarea>
+-->
+</div>
+<p id="credit">Created by <a href="https://twitter.com/_mattwelter" target="_blank">@mattwelter</a></p>
+{% endblock %}
+{% block script %}
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="content">
+	<div>
+		<img id="heading" src="static/h1.png" alt="">
+		<img id="howto" src="static/howto.png" alt="">
+	</div>
+
+	<p>{{ uid }}</p>
+
+
+	<textarea
+	  name="output"
+	  rows="20"
+	  cols="100"
+	  class="boxsizingBorder"
+	  readonly
+	>{{ output }}</textarea>
+</div>
+<p id="credit">Created by <a href="https://twitter.com/_mattwelter" target="_blank">@mattwelter</a></p>
+{% endblock %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.2/socket.io.js" integrity="sha512-YybopSVjZU0fe8TY4YDuQbP5bhwpGBE/T6eBUEZ0usM72IWBfWrgVI13qfX4V2A/W7Hdqnm7PIOYOwP9YHnICw==" crossorigin="anonymous"></script>
+<script type="text/javascript">
+(function(uid) {
+	/* Wait for the page to load. */
+	$(document).ready(function() {
+		const output = $("textarea[name='output']")[0];
+		const socket = io("/proc");
+
+		socket.on("connect", () => {
+      console.log("connect", socket.id, socket.connected);
+    });
+
+    socket.on("disconnect", function() {
+      console.log("disconnect", socket.id, socket.connected);
+    });
+
+		/*
+		 * Update the text area as soon as a message has been received using the
+		 * associated ID.
+		 */
+		socket.on(uid, (data) => {
+			console.log("state change:", data);
+			if ("message" in data) {
+				output.value += data.message + "\n";
+				output.scrollTop = output.scrollHeight;
+			}
+		});
+	});
+})({{uid|tojson}});
+</script>
+{% endblock %}
