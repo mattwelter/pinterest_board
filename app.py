@@ -73,7 +73,8 @@ def get_images(uri, uid):
     	)
 
         # Initialize driver and configure window.
-        driver = webdriver.Chrome(executable_path=os.getcwd()+"/chromedriver")
+        driver_path = os.getcwd()+"/chromedriver"
+        driver = webdriver.Chrome(executable_path=driver_path)
         driver.get(uri)
         driver.maximize_window()
         driver.set_window_position(0, 800)
