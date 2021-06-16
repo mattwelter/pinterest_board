@@ -3,6 +3,8 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import urllib.request
 import requests
+import redis
+import gevent
 import urllib
 import time
 import os
