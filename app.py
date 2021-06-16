@@ -78,7 +78,6 @@ def get_images(uri, uid):
         # Initialize driver and configure window.
         opts = webdriver.ChromeOptions()
         opts.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
-        CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
         driver = webdriver.Chrome(executable_path=str(os.environ.get('CHROMEDRIVER_PATH')), options=opts)
         driver.get(uri)
         driver.maximize_window()
